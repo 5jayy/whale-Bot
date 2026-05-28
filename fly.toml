@@ -1,0 +1,24 @@
+app = "whale-bot-v2"       # change to your unique app name
+primary_region = "iad"     # iad=Virginia — closest to Solana validators
+
+[build]
+
+[env]
+  NODE_ENV = "production"
+
+# Persist SQLite across deploys
+[mounts]
+  source = "whale_data"
+  destination = "/app/data"
+
+# This is a background worker — no HTTP needed
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[http_service]
+  internal_port = 3000
+  auto_stop_machines  = false
+  auto_start_machines = true
+  min_machines_running = 1
